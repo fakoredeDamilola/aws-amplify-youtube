@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import type { Schema } from "../amplify/data/resource";
 import { generateClient } from "aws-amplify/data";
+import { RouterProvider as Router } from "react-router-dom";
+import { router } from "./routes/router";
 
 const client = generateClient<Schema>();
 
@@ -19,7 +21,7 @@ function App() {
 
   return (
     <main>
-      <h1>My todos</h1>
+      {/* <h1>My todos</h1>
       <button onClick={createTodo}>+ new</button>
       <ul>
         {todos.map((todo) => (
@@ -32,7 +34,8 @@ function App() {
         <a href="https://docs.amplify.aws/react/start/quickstart/#make-frontend-updates">
           Review next step of this tutorial.
         </a>
-      </div>
+      </div> */}
+      <Router router={router} />
     </main>
   );
 }
