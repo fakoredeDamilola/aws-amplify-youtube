@@ -22,7 +22,6 @@ function App() {
 
   return (
     <main>
-    
       <Router router={router} />
     </main>
   );

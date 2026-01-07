@@ -29,7 +29,4 @@ const RootLayout = () => {
       </div>
     </div>
 
-  )
-}
-
-export default RootLayout
+export default RootLayout;
