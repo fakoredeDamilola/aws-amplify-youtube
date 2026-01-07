@@ -4,5 +4,6 @@ export const path = {
     SIGNUP: "/signup",
     SETTINGS: "/settings",
     WATCH: "/watch",
-    CHANNEL: "/channel/:channelName"
+    CHANNEL: "/channel/:channelName",
+    CREATE_VIDEO: "/create-video",
 }

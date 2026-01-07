@@ -3,10 +3,12 @@ import { useEffect  } from "react";
 // import { generateClient } from "aws-amplify/data";
 import { RouterProvider as Router } from "react-router-dom";
 import { router } from "./routes/router";
+import { useAuthenticator } from "@aws-amplify/ui-react";
 
 // const client = generateClient<Schema>();
 
 function App() {
+
 
   useEffect(() => {
     // client.models.Todo.observeQuery().subscribe({
@@ -20,7 +22,6 @@ function App() {
 
   return (
     <main>
-    
       <Router router={router} />
     </main>
   );

@@ -7,8 +7,9 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import Categories from '../components/Categories';
 import { useUIContext } from '../context/ContextProvider';
 import { cn } from '../lib/utils';
+import { path } from "../routes/path";
 
-const Navbar = () => {
+const Navbar = ({authenticatedUser}: {authenticatedUser: any}) => {
   const imgURL = ""
   const { isSidebarOpen, toggleSidebar, showCategoryPanel } = useUIContext();
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
@@ -48,7 +49,7 @@ const Navbar = () => {
             <Search />
         </div>
         <div className=' w-68 flex justify-between items-center gap-3 pr-4'>
-          <button className='py-2 px-3 bg-secondary rounded-3xl border border-gray-300 gap-2 text-white flex justify-center items-center'><FaPlus className="text-lg text-white" /> Create</button>
+          <button className='py-2 px-3 bg-secondary rounded-3xl border border-gray-300 gap-2 text-white flex justify-center items-center' onClick={() => navigate(path.CREATE_VIDEO)}><FaPlus className="text-lg text-white" /> Create</button>
           <div>
             <FaBell className="text-xl text-white" />
           </div>

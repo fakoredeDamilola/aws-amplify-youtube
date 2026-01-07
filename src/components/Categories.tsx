@@ -1,37 +1,7 @@
+import { testCategories } from "../constants/data";
 
 const Categories = () => {
-  const testCategories = [
-    {
-      id: 1,
-      name: "All",
-    },
-    {
-      id: 2,
-      name: "Technology",
-    },
-    {
-      id: 3,
-      name: "Business",
-    },
-    {
-      id: 4,
-      name: "Entertainment",
-    },
-    {
-      id: 5,
-      name: "Health",
-    },
-    {
-      id: 6,
-      name: "Sports",
-    },
-    {
-      id: 7,
-      name: "Business",
-    },
 
-
-  ];
   return <div className="flex gap-2 px-3">{
     testCategories.map((category) => (
       <div
