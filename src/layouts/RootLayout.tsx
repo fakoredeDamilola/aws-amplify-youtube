@@ -28,5 +28,7 @@ const RootLayout = () => {
         </div>
       </div>
     </div>
+  )
+}
 
 export default RootLayout;
