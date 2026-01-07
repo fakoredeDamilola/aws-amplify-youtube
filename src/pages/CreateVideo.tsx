@@ -2,21 +2,28 @@ import { useState } from "react";
 import VideoUploadInput from "../components/VideoUploadInput"
 import CategorySelection from "../components/CategorySelection"
 import { uploadVideoToS3 } from "../lib/utils";
+import { useUIContext } from "../context/ContextProvider";
+import type { Schema } from "../../amplify/data/resource";
+import { generateClient } from "aws-amplify/data";
 
 const CreateVideo = () => {
 
+  const client = generateClient<Schema>();
+
+    const { authenticatedUser } = useUIContext();
     const [video, setVideo] = useState<File | null>(null);
     const [selectedCategories, setSelectedCategories] = useState<number[]>([]);
     const [title, setTitle] = useState<string>("");
     const [description, setDescription] = useState<string>("");
 
   const handleSubmit = async() => {
-    if (!video) return;
+    if (!video || !authenticatedUser?.userId) return;
     console.log(video,title,description,selectedCategories);
 
     // upload video to S3
 
-    await uploadVideoToS3(video);
+    const response = await uploadVideoToS3(video,authenticatedUser?.userId);
+    console.log({response});
     const formData = new FormData();
     formData.append("video", video);
     formData.append("title", title);
@@ -25,6 +32,30 @@ const CreateVideo = () => {
 
     // send to API
     console.log(formData);
+    client.models.VideosTable.create({
+      PK: `USER#${authenticatedUser?.userId}`,
+      SK: `VIDEO#${Date.now()}`,
+            GSI1PK: `VIDEO#${authenticatedUser?.userId}`,
+            GSI1SK: `VIDEO#${Date.now()}`,
+            GSI2PK: `CATEGORY#${selectedCategories[0]}`,
+            GSI2SK: `${Date.now()}`,
+            title:title,
+            description:description,
+            categories:selectedCategories.join(","),
+            // s3Bucket:response?.bucketName,
+            // s3Key:response?.key,
+            createdAt: Date.now().toString(),
+            updatedAt:Date.now().toString(),
+            likesCount:0,
+            dislikesCount:0,
+            viewsCount:0,
+            commentsCount:0,
+            watchCount:0,
+            userId:authenticatedUser?.userId,
+            channelId:authenticatedUser?.channelId,
+            thumbnailUrl:"",
+            videoTimeLength:0,
+    });
   };
 
 

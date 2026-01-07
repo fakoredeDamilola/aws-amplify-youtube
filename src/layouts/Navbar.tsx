@@ -9,7 +9,7 @@ import { useUIContext } from '../context/ContextProvider';
 import { cn } from '../lib/utils';
 import { path } from "../routes/path";
 
-const Navbar = ({authenticatedUser}: {authenticatedUser: any}) => {
+const Navbar = () => {
   const imgURL = ""
   const { isSidebarOpen, toggleSidebar, showCategoryPanel } = useUIContext();
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
