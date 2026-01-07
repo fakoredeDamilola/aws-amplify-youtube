@@ -1,8 +1,11 @@
 import { useUIContext } from "../context/ContextProvider";
 import { useEffect, useState } from "react";
+import { path } from "../routes/path";
+import { useNavigate } from "react-router-dom";
 
 const Channel = () => {
   const { closeSidebar, setShowCategoryPanel } = useUIContext();
+  const navigate = useNavigate();
 
   useEffect(() => {
     closeSidebar();
@@ -89,7 +92,7 @@ const Channel = () => {
             </div>
           ) : (
           <div className="flex flex-col items-center justify-center h-64">
-           <button className='py-2 px-5 bg-gray-300 rounded-3xl border border-gray-300 gap-2 text-white flex justify-center items-center ml-4 hover:bg-gray-400 transition'> Create content</button>
+           <button className='py-2 px-5 bg-gray-300 rounded-3xl border border-gray-300 gap-2 text-white flex justify-center items-center ml-4 hover:bg-gray-400 transition' onClick={() => navigate(path.CREATE_VIDEO)}> Create content</button>
             <p className="text-gray-400 mt-2 text-center max-w-md">No content available for this tab. Start creating videos to build your channel.</p>
           </div>
           )}

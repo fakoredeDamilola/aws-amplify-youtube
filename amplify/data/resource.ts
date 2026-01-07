@@ -7,10 +7,41 @@ specifies that any user authenticated via an API key can "create", "read",
 "update", and "delete" any "Todo" records.
 =========================================================================*/
 const schema = a.schema({
-  Todo: a
+  // Todo: a
+  //   .model({
+  //     content: a.string(),
+  //   })
+  //   .authorization((allow) => [allow.publicApiKey()]),
+  VideosTable:a
     .model({
-      content: a.string(),
+      PK: a.string().required(),
+      SK: a.string().required(),
+      GSI1PK: a.string(),
+      GSI1SK: a.string(),
+      GSI2PK: a.string(),
+      GSI2SK: a.string(),
+      title:a.string(),
+      description:a.string(),
+      categories:a.string(),
+      s3Bucket:a.string(),
+      s3Key:a.string(),
+      createdAt:a.string(),
+      updatedAt:a.string(),
+      likesCount:a.integer(),
+      dislikesCount:a.integer(),
+      viewsCount:a.integer(),
+      commentsCount:a.integer(),
+      watchCount:a.integer(),
+      userId:a.string(),
+      channelId:a.string(),
+      thumbnailUrl:a.string(),
+      videoTimeLength:a.integer(),
     })
+    .identifier(['PK', 'SK'])
+    .secondaryIndexes((index) => [
+      index('GSI1PK').sortKeys(['GSI1SK']).queryField('listByGSI1'),
+      index('GSI2PK').sortKeys(['GSI2SK']).queryField('listByGSI2'),
+    ])
     .authorization((allow) => [allow.publicApiKey()]),
 });
 

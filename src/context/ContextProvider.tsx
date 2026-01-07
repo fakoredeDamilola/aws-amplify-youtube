@@ -15,6 +15,8 @@ interface UIContextState {
   setShowCategoryPanel: (show: boolean) => void;
   theme: Theme;
   setTheme: (theme: Theme) => void;
+  authenticatedUser: any;
+  setAuthenticatedUser: (user: any) => void;
 }
 
 const UIContext = createContext<UIContextState | undefined>(undefined);
@@ -25,6 +27,7 @@ export const UIContextProvider = ({ children }: { children: ReactNode }) => {
   const [watchVideoId, setWatchVideoId] = useState<string | null>(null);
   const [showCategoryPanel, setShowCategoryPanel] = useState<boolean>(true);
   const [theme, setTheme] = useState<Theme>("light");
+  const [authenticatedUser, setAuthenticatedUser] = useState<any>(null);
 
   const toggleSidebar = () => setIsSidebarOpen((prev) => !prev);
   
@@ -45,6 +48,8 @@ export const UIContextProvider = ({ children }: { children: ReactNode }) => {
         setShowCategoryPanel,
         theme,
         setTheme,
+        authenticatedUser,
+        setAuthenticatedUser
       }}
     >
       {children}
