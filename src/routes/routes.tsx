@@ -1,7 +1,7 @@
 import React from "react";
 import { path } from "./path";
 import Channel from "../pages/Channel";
-import { Authenticator } from "@aws-amplify/ui-react";
+import ProtectedRoute from "../components/ProtectedRoute";
 
 const Dashboard = React.lazy(() => import("../pages/Dashboard"));
 const Login = React.lazy(() => import("../pages/Login"));
@@ -35,15 +35,15 @@ export const routes = [
     {
         path: path.CHANNEL,
         element: 
-        <Authenticator>
+        <ProtectedRoute>
             <Channel />
-        </Authenticator>
+        </ProtectedRoute>
     },
     {
         path: path.CREATE_VIDEO,
         element: 
-        <Authenticator>
+        <ProtectedRoute>
             <CreateVideo />
-        </Authenticator>
+        </ProtectedRoute>
     }
 ]

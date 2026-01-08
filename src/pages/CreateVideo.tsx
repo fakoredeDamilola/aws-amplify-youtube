@@ -22,7 +22,7 @@ const CreateVideo = () => {
 
     // upload video to S3
 
-    const response = await uploadVideoToS3(video,authenticatedUser?.userId);
+    const response = await uploadVideoToS3(title.toLowerCase().replace(/\s/g, "-"),video);
     console.log({response});
     const formData = new FormData();
     formData.append("video", video);
