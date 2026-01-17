@@ -20,6 +20,8 @@ const schema = a.schema({
       GSI1SK: a.string(),
       GSI2PK: a.string(),
       GSI2SK: a.string(),
+      GSI3PK: a.string(),
+      GSI3SK: a.string(),
       title:a.string(),
       description:a.string(),
       categories:a.string(),
@@ -36,11 +38,14 @@ const schema = a.schema({
       channelId:a.string(),
       thumbnailUrl:a.string(),
       videoTimeLength:a.integer(),
+      videoType:a.string(),
+      channelName:a.string(),
     })
     .identifier(['PK', 'SK'])
     .secondaryIndexes((index) => [
       index('GSI1PK').sortKeys(['GSI1SK']).queryField('listByGSI1'),
       index('GSI2PK').sortKeys(['GSI2SK']).queryField('listByGSI2'),
+      index('GSI3PK').sortKeys(['GSI3SK']).queryField('listByGSI3'),
     ])
     .authorization((allow) => [allow.publicApiKey()]),
 });

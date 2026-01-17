@@ -1,7 +1,8 @@
-import { useEffect  } from "react";
+import { useEffect } from "react";
 import { RouterProvider as Router } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { router } from "./routes/router";
-
 
 // const client = generateClient<Schema>();
 
@@ -21,6 +22,17 @@ function App() {
   return (
     <main>
       <Router router={router} />
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
     </main>
   );
 }

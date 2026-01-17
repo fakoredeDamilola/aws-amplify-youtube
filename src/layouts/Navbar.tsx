@@ -8,10 +8,12 @@ import Categories from '../components/Categories';
 import { useUIContext } from '../context/ContextProvider';
 import { cn } from '../lib/utils';
 import { path } from "../routes/path";
+import { useAuthenticator } from "@aws-amplify/ui-react";
 
 const Navbar = () => {
   const imgURL = ""
   const { isSidebarOpen, toggleSidebar, showCategoryPanel } = useUIContext();
+  const { signOut } = useAuthenticator();
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -29,8 +31,7 @@ const Navbar = () => {
   };
 
   const handleSignOut = () => {
-    // Wire your auth sign-out logic here
-    console.log("Sign out clicked");
+    signOut();
     setIsProfileMenuOpen(false);
   };
   

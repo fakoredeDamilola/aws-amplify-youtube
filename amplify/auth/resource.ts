@@ -8,4 +8,10 @@ export const auth = defineAuth({
   loginWith: {
     email: true,
   },
+  userAttributes: {
+    nickname: {
+      // stored in Cognito as custom:channelName
+      mutable: true,
+    },
+  },
 });
