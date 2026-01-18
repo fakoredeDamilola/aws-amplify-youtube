@@ -22,7 +22,6 @@ const mediaConvertRole = new iam.Role(
   "MediaConvertServiceRole",
   {
     assumedBy: new iam.ServicePrincipal("mediaconvert.amazonaws.com"),
-    roleName: 'MediaConvert_Role',
   }
 )
 
