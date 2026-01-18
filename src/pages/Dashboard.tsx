@@ -9,8 +9,6 @@ import { IVideo } from "../interfaces/IVideo"
 const Dashboard = () => {
 
   const [videos, setVideos] = useState<IVideo[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
   const [shorts, setShorts] = useState<IVideo[]>([]);
 
   const client = generateClient<Schema>();

@@ -1,20 +1,13 @@
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import { toast } from "react-toastify";
 import VideoUploadInput from "../components/VideoUploadInput"
 import CategorySelection from "../components/CategorySelection"
 import { cn, uploadMediaToS3 } from "../lib/utils";
 import { useUIContext } from "../context/ContextProvider";
-import type { Schema } from "../../amplify/data/resource";
-import { generateClient } from "aws-amplify/data";
 import outputs from "../../amplify_outputs.json";
-import { useNavigate } from "react-router-dom";
 import { fetchAuthSession } from "aws-amplify/auth";
 
 const CreateVideo = () => {
-
-  const client = generateClient<Schema>();
-  const navigate = useNavigate();
-
   
 
     const { authenticatedUser } = useUIContext();
