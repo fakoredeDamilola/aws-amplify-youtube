@@ -4,7 +4,6 @@ import VideoUploadInput from "../components/VideoUploadInput"
 import CategorySelection from "../components/CategorySelection"
 import { cn, uploadMediaToS3 } from "../lib/utils";
 import { useUIContext } from "../context/ContextProvider";
-import outputs from "../../amplify_outputs.json";
 import { fetchAuthSession } from "aws-amplify/auth";
 
 const CreateVideo = () => {
