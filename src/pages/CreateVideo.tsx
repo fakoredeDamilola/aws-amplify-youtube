@@ -25,7 +25,6 @@ const CreateVideo = () => {
     console.log(video,title,description,selectedCategories);
 
     // upload video to S3
- const bucketName = outputs.storage.buckets[0].name; 
     const videoSlug = title.toLowerCase().replace(/\s/g, "-") || "video";
     // const thumbnailSlug = `${videoSlug}-thumbnail`;
     // const thumbnailResponse = await uploadMediaToS3(thumbnailSlug, thumbnail);
