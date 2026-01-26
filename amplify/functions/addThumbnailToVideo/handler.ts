@@ -4,7 +4,6 @@ import {
   CreateJobCommand,
   DescribeEndpointsCommand,
 } from '@aws-sdk/client-mediaconvert';
-import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
 import { Schema } from "../../../amplify/data/resource";
 import { generateClient } from "@aws-amplify/api";
 
