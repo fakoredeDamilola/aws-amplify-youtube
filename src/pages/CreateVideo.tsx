@@ -5,10 +5,14 @@ import CategorySelection from "../components/CategorySelection"
 import { cn, uploadMediaToS3 } from "../lib/utils";
 import { useUIContext } from "../context/ContextProvider";
 import { fetchAuthSession } from "aws-amplify/auth";
+import { Schema } from "../../amplify/data/resource";
+import { generateClient } from "@aws-amplify/api";
+import outputs from "../../amplify_outputs.json";
+import { useNavigate } from "react-router-dom";
 
+const client = generateClient<Schema>();
 const CreateVideo = () => {
-  
-
+    const navigate = useNavigate();
     const { authenticatedUser } = useUIContext();
     const [video, setVideo] = useState<File | null>(null);
     const [selectedCategories, setSelectedCategories] = useState<number[]>([]);
@@ -43,48 +47,49 @@ const CreateVideo = () => {
 const session = await fetchAuthSession();
 const idToken = session.tokens?.idToken;
 const channelName = idToken?.payload.nickname;
+ const bucketName = outputs.storage.buckets[0].name; 
 console.log({channelName})
 
     // send to API (video + thumbnail S3 keys available in response.path / thumbnailResponse.path)
     console.log({response});
     setLoading(true);
-    // const uploadingDetails = await client.models.VideosTable.create({
-    //   PK: `USER#${authenticatedUser?.userId}`,
-    //   SK: `VIDEO#${Date.now()}`,
-    //         GSI1PK: `VIDEO#${authenticatedUser?.userId}`,
-    //         GSI1SK: `VIDEO#${Date.now()}`,
-    //         GSI2PK: `CATEGORY#${selectedCategories[0]}`,
-    //         GSI2SK: `${Date.now()}`,
-    //         GSI3PK: `CHANNEL#${channelName}`,
-    //         GSI3SK: `CHANNEL#${Date.now()}`,
-    //         title:title,
-    //         description:description,
-    //         categories:selectedCategories.join(","),
-    //         s3Bucket:bucketName,
-    //         s3Key:response?.path,
-    //         createdAt: Date.now().toString(),
-    //         updatedAt:Date.now().toString(),
-    //         likesCount:0,
-    //         dislikesCount:0,
-    //         viewsCount:0,
-    //         commentsCount:0,`
-    //         watchCount:0,
-    //         userId:authenticatedUser?.userId,
-    //         channelId:authenticatedUser?.channelId,
-    //         thumbnailUrl:"",
-    //         videoTimeLength:0,
-    //         videoType,
-    //         channelName:channelName || "anonymous",
-    // });
-    // console.log({uploadingDetails});
-    // setTitle("");
-    // setDescription("");
-    // setSelectedCategories([]);
-    // setVideo(null);
-    // setVideoType("Video");
-    // setLoading(false);
+    await client.models.VideosTable.create({
+      PK: `USER#${authenticatedUser?.userId}`,
+      SK: `VIDEO#${Date.now()}`,
+            GSI1PK: `VIDEO#${authenticatedUser?.userId}`,
+            GSI1SK: `VIDEO#${Date.now()}`,
+            GSI2PK: `CATEGORY#${selectedCategories[0]}`,
+            GSI2SK: `${Date.now()}`,
+            GSI3PK: `CHANNEL#${channelName}`,
+            GSI3SK: `CHANNEL#${Date.now()}`,
+            title:title,
+            description:description,
+            categories:selectedCategories.join(","),
+            s3Bucket:bucketName,
+            s3Key:response?.path,
+            createdAt: Date.now().toString(),
+            updatedAt:Date.now().toString(),
+            likesCount:0,
+            dislikesCount:0,
+            viewsCount:0,
+            commentsCount:0,
+            watchCount:0,
+            userId:authenticatedUser?.userId,
+            channelId:authenticatedUser?.channelId,
+            thumbnailUrl:`${videoSlug}.0000000.jpg`,
+            videoTimeLength:0,
+            videoOutputPath:`videos/${videoSlug}.mp4`,
+            videoType,
+            channelName:channelName || "anonymous",
+    });
+    setTitle("");
+    setDescription("");
+    setSelectedCategories([]);
+    setVideo(null);
+    setVideoType("Video");
+    setLoading(false);
     toast.success("Video uploaded successfully");
-    // navigate("/");
+    navigate("/");
     }catch(error){
       console.log(error);
       setLoading(false);

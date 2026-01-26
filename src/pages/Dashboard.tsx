@@ -34,9 +34,9 @@ const Dashboard = () => {
   ))
 }
     </div>
-    <div className="mt-6">
+   {shorts.length > 0 && <div className="mt-6">
         <h2 className="font-bold text-xl">Shorts</h2>
-    </div>
+    </div>}
     <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 mt-3">
       {
   shorts.slice(0,5).map((video) => (

@@ -37,6 +37,7 @@ const schema = a.schema({
       userId:a.string(),
       channelId:a.string(),
       thumbnailUrl:a.string(),
+      videoOutputPath:a.string(),
       videoTimeLength:a.integer(),
       videoType:a.string(),
       channelName:a.string(),

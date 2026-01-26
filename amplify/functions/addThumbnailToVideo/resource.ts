@@ -4,6 +4,6 @@ export const addThumbnailToVideo = defineFunction({
   name: 'addThumbnailToVideo', // optional, defaults to directory name
   entry: './handler.ts', // optional, defaults to "./handler.ts"
   environment: {
-    MEDIA_CONVERT_ROLE_ARN: "arn:aws:iam::017915196139:role/MediaConvert_Role",
+    MEDIA_CONVERT_ROLE_ARN: "arn:aws:iam::017915196139:role/amplify-amplifyvitereactt-MediaConvertServiceRole08-z4z51iHtHl1Y",
   },
 });
