@@ -1,7 +1,6 @@
 import { IVideo } from "../interfaces/IVideo"
 import { HiDotsVertical } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
-import outputs from "../../amplify_outputs.json";
 import { getUrl } from "aws-amplify/storage";
 import { useEffect, useState } from "react";
 

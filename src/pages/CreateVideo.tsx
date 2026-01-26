@@ -80,7 +80,7 @@ console.log({channelName})
             videoTimeLength:0,
             videoOutputPath:`videos/${videoSlug}.mp4`,
             videoType,
-            channelName:channelName || "anonymous",
+            // channelName:channelName || "anonymous",
     });
     setTitle("");
     setDescription("");
