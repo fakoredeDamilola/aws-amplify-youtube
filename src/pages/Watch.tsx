@@ -7,7 +7,6 @@ import { getUrl } from "aws-amplify/storage"
 const Watch = () => {
      const [searchParams] = useSearchParams()
      const [videoUrl, setVideoUrl] = useState<string | null>(null)
-     const [playedSeconds, setPlayedSeconds] = useState(0);
   const videoId = searchParams.get("v")
   console.log({ videoId })
   const { closeSidebar, setShowCategoryPanel ,selectedVideo, selectedMediaType} = useUIContext();
