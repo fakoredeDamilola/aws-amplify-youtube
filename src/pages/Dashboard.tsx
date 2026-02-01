@@ -16,7 +16,6 @@ const Dashboard = () => {
      client.models.VideosTable.observeQuery().subscribe({
       next: (data) => {
         console.log({data});
-        // setVideos([...data.items]);
         const videos = data.items.filter((item) => item.videoType === VideoType.Video);
         const shorts = data.items.filter((item) => item.videoType === VideoType.Short);
         setVideos(videos as IVideo[]);

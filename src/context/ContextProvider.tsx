@@ -17,6 +17,10 @@ interface UIContextState {
   setTheme: (theme: Theme) => void;
   authenticatedUser: any;
   setAuthenticatedUser: (user: any) => void;
+  selectedVideo: any;
+  setSelectedVideo: (video: any) => void;
+  selectedMediaType: string;
+  setSelectedMediaType: (mediaType: string) => void;
 }
 
 const UIContext = createContext<UIContextState | undefined>(undefined);
@@ -28,6 +32,8 @@ export const UIContextProvider = ({ children }: { children: ReactNode }) => {
   const [showCategoryPanel, setShowCategoryPanel] = useState<boolean>(true);
   const [theme, setTheme] = useState<Theme>("light");
   const [authenticatedUser, setAuthenticatedUser] = useState<any>(null);
+  const [selectedVideo, setSelectedVideo] = useState<any>(null);
+  const [selectedMediaType, setSelectedMediaType] = useState<string>("");
 
   const toggleSidebar = () => setIsSidebarOpen((prev) => !prev);
   
@@ -49,7 +55,11 @@ export const UIContextProvider = ({ children }: { children: ReactNode }) => {
         theme,
         setTheme,
         authenticatedUser,
-        setAuthenticatedUser
+        setAuthenticatedUser,
+        selectedVideo,
+        setSelectedVideo,
+        selectedMediaType,
+        setSelectedMediaType
       }}
     >
       {children}

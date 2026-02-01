@@ -8,15 +8,16 @@ import Categories from '../components/Categories';
 import { useUIContext } from '../context/ContextProvider';
 import { cn } from '../lib/utils';
 import { path } from "../routes/path";
+import { FaRegUser } from "react-icons/fa";
 import { useAuthenticator } from "@aws-amplify/ui-react";
 
 const Navbar = () => {
   const imgURL = ""
   const { isSidebarOpen, toggleSidebar, showCategoryPanel } = useUIContext();
-  const { signOut } = useAuthenticator();
+  const { signOut ,user}   = useAuthenticator();
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
   const navigate = useNavigate();
-
+  console.log({user})
   const handleToggleSidebar = () => {
     toggleSidebar();
   };
@@ -30,11 +31,15 @@ const Navbar = () => {
     setIsProfileMenuOpen(false);
   };
 
+  const handleSignIn = () => {
+    navigate(path.LOGIN);
+    setIsProfileMenuOpen(false);
+  };    
+
   const handleSignOut = () => {
     signOut();
     setIsProfileMenuOpen(false);
-  };
-  
+    };
   return (
     <div  className={cn(
         "bg-primary fixed top-0 z-20 transition-all duration-300",
@@ -46,6 +51,7 @@ const Navbar = () => {
 <div className="p-2 mt-5 pl-2" onClick={handleToggleSidebar}>
 <GiHamburgerMenu className="text-white text-xl" />
 </div>
+  <h2 className="text-red-500 cursor-pointer text-xl pr-4 mt-6 font-bold" onClick={() => navigate("/")}>MeTube</h2>
         <div className="flex h-[100%] w-full">
             <Search />
         </div>
@@ -63,7 +69,7 @@ const Navbar = () => {
               {imgURL ? (
                 <img src={imgURL} alt="Profile" className="w-full h-full object-cover" />
               ) : (
-                <span className="text-sm font-semibold text-white">FD</span>
+                <span className="text-sm font-semibold text-white"><FaRegUser className="text-lg text-white" /></span>
               )}
             </button>
 
@@ -75,20 +81,32 @@ const Navbar = () => {
                   : "opacity-0 scale-95 pointer-events-none"
               )}
             >
+             {user ? <>
+              <p>{user?.username}</p>   
               <button
-                type="button"
-                className="w-full text-left px-3 py-2 text-sm hover:bg-white/10"
-                onClick={handleViewChannel}
-              >
-                View channel
-              </button>
-              <button
-                type="button"
-                className="w-full text-left px-3 py-2 text-sm hover:bg-white/10"
-                onClick={handleSignOut}
-              >
-                Sign out
-              </button>
+                  type="button"
+                  className="w-full text-left px-3 py-2 text-sm hover:bg-white/10"
+                  onClick={handleViewChannel}
+                >
+                  View channel
+                </button>
+                <button
+                  type="button"
+                  className="w-full text-left px-3 py-2 text-sm hover:bg-white/10"
+                  onClick={handleSignOut}
+                >
+                  Sign out
+                </button>
+          </> : <>
+         <button
+                  type="button"
+                  className="w-full text-left px-3 py-2 text-sm hover:bg-white/10"
+                  onClick={handleSignIn}
+                >
+                  Sign in
+                </button> 
+          </>}
+             
             </div>
           </div>
         </div>

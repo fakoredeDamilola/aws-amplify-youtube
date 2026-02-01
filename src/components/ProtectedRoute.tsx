@@ -164,14 +164,14 @@ const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
 
   if (authStatus !== 'authenticated') {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <Authenticator formFields={formFields} components={components}>
-      {({ signOut }) => <button onClick={signOut}>Sign out</button>}
-    </Authenticator>
+        <div className="flex items-center justify-center min-h-screen">
+          <Authenticator formFields={formFields} components={components}>
+        {({ signOut }) => <button onClick={signOut}>Sign out</button>}
+      </Authenticator>
 
       </div>
     );
-  }
+  } 
 
   return <>{children}</>;
 };
